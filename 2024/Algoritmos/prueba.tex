@@ -1,10 +1,8 @@
-% !TeX root = prueba.tex
 \documentclass{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel} % Agregar es-nodecimaldot si hay problemas con el separador de decimales y de miles
-% \usepackage{noto-mono} % Tipografía "Noto Sans Mono" para monospace
-\usepackage{amsmath, amsbsy, amssymb} % Agregar cuando se necesiten: amscd, amssymb, amsthm, latexsym
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amsbsy, amssymb}
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
@@ -20,9 +18,8 @@
 \usepackage{float}
 \usepackage{wrapfig}
 \usepackage{titlesec}
+\usepackage{hyperref}
 
-
-% Configurar \subsection para que no tenga numeración 
 \titleformat{\subsection}[hang]
   {\normalfont\bfseries}
   {}
@@ -30,7 +27,6 @@
   {}
 
 \newcommand{\setupsizes}[1]{
-    % Trucos para que entre el contenido en el máximo de carillas.
     \usepackage[fontsize=#1]{fontsize}
     \usepackage{helvet}
     \renewcommand{\familydefault}{\sfdefault}
@@ -40,8 +36,6 @@
     \titlespacing*{\section}{0pt}{1em}{0.65em}
     \titlespacing*{\subsection}{0pt}{0.5em}{0.5em}
     \pagenumbering{gobble}
-
-    % Tamaño de hoja y márgenes
     \usepackage[a4paper,top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
     \setlength{\parindent}{0em}
     \setlength{\parskip}{0.65em}
@@ -52,15 +46,11 @@
     \setlength{\belowdisplayshortskip}{1em}
 }
 
-% Numeración de las secciones y el índice
 \setcounter{tocdepth}{1}
 \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
 
-% Color de los links externos
-\usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
 
-% Permite math mode adentro de listings (bloques de "código")
 \usepackage{listings}
 \lstset{
     inputencoding=utf8,
@@ -82,11 +72,9 @@
         {Ñ}{{\~N}}1
 }
 
-% Alias para íconos/símbolos
 \usepackage{pifont}
 \newcommand{\xmark}{\color{purple}\ding{54}}
 
-% Otros alias
 \newcommand{\xor}{\oplus}
 \newcommand{\nor}{\downarrow}
 \newcommand{\opsub}[2]{\ensuremath{#1_{\mathrm{#2}}}}
@@ -95,17 +83,13 @@
 \newcommand{\implicaLuego}{\opsub{\implies}{\scriptscriptstyle{L}}}
 \renewcommand{\implies}{\Rightarrow}
 
-% Columna "x" tiene fondo amarillo
 \usepackage{colortbl}
 \newcolumntype{x}{>{\columncolor[HTML]{FFF2CC}}c}
 
-% Tipografía para los algoritmos
 \AtBeginEnvironment{algorithmic}{\small}
 
-% Saca sufijo "Algorithm X"
 \captionsetup[algorithm]{labelformat=empty}
 
-% Alias para algoritmos
 \newcommand{\Complexity}[1]{\textbf{Complejidad}: #1}
 \newcommand{\Pre}[1]{\textbf{Pre} $\equiv$ \{#1\}}
 
@@ -163,15 +147,26 @@ Dentro de los ejercicios de Sorting es muy común tener que apoyarnos en estruct
 Entonces modularizemos este proceso en dos funciones: Una que a partir de la lista va a devolver un diccionario, y otra que a partir del diccionario va a devolver una lista de tuplas. 
 \begin{algorithm}[H]
     \caption{
-        \textbf{proc contarCantidad}(\textbf{in} A: vector<nat>): arreglo(nat)
+        \textbf{proc contarCantidad}(\textbf{in} l: \textnormal{vector\textless{}nat\textgreater{}}): \textnormal{DiccLog\textless{}nat, nat\textgreater{}}
     }
     \begin{algorithmic}[1]
-        \State E: arreglo(escalera) $\gets$ ObtenerEscaleras(A) \Comment {$O(n)$}
-        \State OrdenarEscaleras(E, A) \Comment {$O(n log(n))$}
-        \State res $\gets$ ReposicionarEscaleras(E, A) \Comment{$O(n)$}
+        \State var res: \textnormal{DiccLog\textless{}nat, nat\textgreater{}} = new diccionarioVacío();  \Comment {$O(1)$}
+        \For{$i = 0$ \textbf{to} $l.longitud()$} \Comment {$O(n)$}
+            \State var actual: int = l.obtener(i); \Comment {$O(1)$}
+            \If{$res.\text{está}(actual)$} \Comment {$O(Log(n))$}
+                \State var previo: int = res.obtener(actual); \Comment {$O(Log(n))$}
+                \State \hyperref[sec:explanation]{previo = previo + 1; \textcolor{blue}{*}}
+            \Else
+                \State res.definir(actual, 1); \Comment {$O(Log(n))$}
+            \EndIf 
+        \EndFor
+    \State return res;
     \end{algorithmic}
-    \Complexity{$O(n) + O(n log(n)) + O(n) = O(n log(n))$}
-    \end{algorithm}
+    \Complexity{$O(n) \times O(2Log(n)) = O(nLog(n))$}
+\end{algorithm}
+
+\label{sec:explanation}
+\textcolor{blue}{*}Asumimos que hay aliasing, por lo que cuando pedimos el valor asociada a una clave en el diccionario, al modificar el valor no hace falta volver a modificar el par clave valor. (Agregar explicación de porque pasa)
 \subsubsection*{Paso 2: Ordenar la lista de tuplas}
 \subsubsection*{Paso 3: Reconstruir la solución}
 
