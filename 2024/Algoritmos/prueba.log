@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.7)  7 AUG 2024 22:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.7)  8 AUG 2024 20:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -675,6 +675,10 @@ File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 ) (prueba.aux
 LaTeX Info: Redefining \. on input line 13.
 LaTeX Info: Redefining \% on input line 13.
+
+
+LaTeX Warning: Label `sec:explanation1' multiply defined.
+
 )
 \openout1 = `prueba.aux'.
 
@@ -800,11 +804,15 @@ LaTeX Font Info:    Font shape `OML/phv/m/n' in size <10.03757> not available
 LaTeX Font Info:    Calculating math sizes for size <10.03757> on input line 153.
 
 
+LaTeX Warning: Hyper reference `sec:explanation2' on page  undefined on input line 176.
+
+
+
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.173 \end{document}
+l.194 \end{document}
                      [2] (prueba.aux
 LaTeX Info: Redefining \. on input line 13.
 LaTeX Info: Redefining \% on input line 13.
@@ -818,21 +826,27 @@ L3 programming layer <2024-07-20>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `prueba.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 19948 strings out of 475834
- 332184 string characters out of 5778306
+ 19954 strings out of 475834
+ 332280 string characters out of 5778306
  1942957 words of memory out of 5000000
- 42208 multiletter control sequences out of 15000+600000
+ 42213 multiletter control sequences out of 15000+600000
  576426 words of font info for 77 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
  94i,8n,117p,604b,683s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prueba.pdf (2 pages, 62005 bytes).
+</home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on prueba.pdf (2 pages, 80184 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 7 named destinations out of 1000 (max. 500000)
+ 62 PDF objects out of 1000 (max. 8388607)
+ 8 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

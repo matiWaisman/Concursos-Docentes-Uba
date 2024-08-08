@@ -147,7 +147,7 @@ Dentro de los ejercicios de Sorting es muy común tener que apoyarnos en estruct
 Entonces modularizemos este proceso en dos funciones: Una que a partir de la lista va a devolver un diccionario, y otra que a partir del diccionario va a devolver una lista de tuplas. 
 \begin{algorithm}[H]
     \caption{
-        \textbf{proc contarCantidad}(\textbf{in} l: \textnormal{vector\textless{}nat\textgreater{}}): \textnormal{DiccLog\textless{}nat, nat\textgreater{}}
+        \textbf{proc crearDiccionarioDeCantidades}(\textbf{in} l: \textnormal{Vector\textless{}nat\textgreater{}}): \textnormal{DiccLog\textless{}nat, nat\textgreater{}}
     }
     \begin{algorithmic}[1]
         \State var res: \textnormal{DiccLog\textless{}nat, nat\textgreater{}} = new diccionarioVacío();  \Comment {$O(1)$}
@@ -155,7 +155,7 @@ Entonces modularizemos este proceso en dos funciones: Una que a partir de la lis
             \State var actual: int = l.obtener(i); \Comment {$O(1)$}
             \If{$res.\text{está}(actual)$} \Comment {$O(Log(n))$}
                 \State var previo: int = res.obtener(actual); \Comment {$O(Log(n))$}
-                \State \hyperref[sec:explanation]{previo = previo + 1; \textcolor{blue}{*}}
+                \State \hyperref[sec:explanation1]{previo = previo + 1; \textcolor{blue}{$*^{1}$}}
             \Else
                 \State res.definir(actual, 1); \Comment {$O(Log(n))$}
             \EndIf 
@@ -165,8 +165,29 @@ Entonces modularizemos este proceso en dos funciones: Una que a partir de la lis
     \Complexity{$O(n) \times O(2Log(n)) = O(nLog(n))$}
 \end{algorithm}
 
-\label{sec:explanation}
-\textcolor{blue}{*}Asumimos que hay aliasing, por lo que cuando pedimos el valor asociada a una clave en el diccionario, al modificar el valor no hace falta volver a modificar el par clave valor. (Agregar explicación de porque pasa)
+\label{sec:explanation1}
+\textcolor{blue}{$*^{1}$}Asumimos que hay aliasing, por lo que cuando pedimos el valor asociada a una clave en el diccionario, al modificar el valor no hace falta volver a modificar el par clave valor. (Agregar explicación de porque pasa)
+\begin{algorithm}[H]
+    \caption{
+        \textbf{proc crearListaDeTuplas}(\textbf{in} dict: \textnormal{DiccLog\textless{}nat, nat\textgreater{}}): \textnormal{ListaEnlazada\textless{}Tupla \textless{} nat, nat \textgreater{}\textgreater{}}
+    }
+    \begin{algorithmic}[1]
+        \State var res : ListaEnlazada\textless{}Tupla \textless{} nat, nat \textgreater{}\textgreater{} = vectorVacío(); \Comment {$O(1)$}
+        \State \hyperref[sec:explanation2] {var it : IteradorBidireccional = dict.iterador(); \textcolor{cyan}{$*^{2}$}}  \Comment{$O(1)$}
+        \While{it.haySiguiente()} \Comment{$O(n)$} 
+            \State res.agregarAtras(it); \Comment{$O(1)$}
+            \State it.siguiente();\Comment{$O(1)$}
+        \EndWhile
+        \State return res;
+    \end{algorithmic}
+    \Complexity{$O(n)$}
+\end{algorithm}
+\label{sec:explanation1}
+
+\textcolor{cyan}{$*^{2}$} Recordar que el iterador está representado como una tupla, cuyo primer elemento es la clave y el segundo el valor.
+
+Agregar comentario complejidad recorrer el diccionario.
+
 \subsubsection*{Paso 2: Ordenar la lista de tuplas}
 \subsubsection*{Paso 3: Reconstruir la solución}
 
