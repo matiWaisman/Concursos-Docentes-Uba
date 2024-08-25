@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1723158563.58623 "/home/mati/Facu/Concursos-Docentes-Uba/2024/Algoritmos/prueba.tex" "prueba.pdf" "prueba" 1723158564.96954 0
+["pdflatex"] 1724544818.17666 "/home/mati/Facu/Concursos-Docentes-Uba/2024/Algoritmos/prueba.tex" "prueba.pdf" "prueba" 1724544819.39227 0
   "/home/mati/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map" 1723078830.97917 475249 7d09700acd4133e6b07218f63c2269f9 ""
   "/home/mati/.miktex/texmfs/data/miktex/data/le/pdftex/pdflatex.fmt" 1723058800.1301 21086260 45b9613968a7334627cf64e0f0590460 ""
   "/home/mati/.miktex/texmfs/install/fonts/enc/dvips/base/8r.enc" 1723058524.99411 4993 1194fb36dfcb11d9ae9802f2b00b60a3 ""
@@ -29,8 +29,10 @@
   "/home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1723058521.97011 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1723058521.97011 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1723058522.00211 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1723058522.11011 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb" 1136864148 35941 f27169cc74234d5bd5e4cca5abafaabb ""
   "/home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb" 1136864148 44648 23115b2a545ebfe2c526c3ca99db8b95 ""
+  "/home/mati/.miktex/texmfs/install/fonts/type1/urw/zapfding/uzdr.pfb" 1136864148 45955 6dfcb282cf470ceb18d57d017b7898d6 ""
   "/home/mati/.miktex/texmfs/install/fonts/vf/adobe/helvetic/phvb7t.vf" 1136783054 1372 1c26b449eb4a1a0bcf6ac7cfe376d450 ""
   "/home/mati/.miktex/texmfs/install/fonts/vf/adobe/helvetic/phvr7t.vf" 1136783054 1372 dc841a9f00a1a11b1443367ae6c5588e ""
   "/home/mati/.miktex/texmfs/install/tex/context/base/mkii/supp-pdf.mkii" 1723058533.63011 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -161,10 +163,10 @@
   "/home/mati/.miktex/texmfs/install/tex/latex/wrapfig/wrapfig.sty" 1723058836.9621 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "/home/mati/.miktex/texmfs/install/tex/latex/xcolor/xcolor.sty" 1723058536.84211 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "/home/mati/.miktex/texmfs/install/tex/latex/xkeyval/xkeyval.sty" 1723058536.98211 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "/home/mati/Facu/Concursos-Docentes-Uba/2024/Algoritmos/prueba.tex" 1723158562.90313 9096 a90acd86002c9014e875eb71f7247373 ""
-  "prueba.aux" 1723158564.73913 1357 12193c5294117975484a2c9006dd8cd9 "pdflatex"
-  "prueba.out" 1723158564.65913 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "prueba.tex" 1723158562.90313 9096 a90acd86002c9014e875eb71f7247373 ""
+  "/home/mati/Facu/Concursos-Docentes-Uba/2024/Algoritmos/prueba.tex" 1724544815.99673 13414 673b4fc6ac8066eaccca25be7de21fb7 ""
+  "prueba.aux" 1724544819.16873 2117 5db33136f2bc5fab0ea31d875c0cd65e "pdflatex"
+  "prueba.out" 1724544819.05273 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "prueba.tex" 1724544815.99673 13414 673b4fc6ac8066eaccca25be7de21fb7 ""
   (generated)
   "prueba.aux"
   "prueba.log"

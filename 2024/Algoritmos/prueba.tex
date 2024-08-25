@@ -19,6 +19,11 @@
 \usepackage{wrapfig}
 \usepackage{titlesec}
 \usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{pifont}
+
+
+\newcommand{\curly}{\mathrel{\leadsto}}
 
 \titleformat{\subsection}[hang]
   {\normalfont\bfseries}
@@ -147,40 +152,44 @@ Dentro de los ejercicios de Sorting es muy común tener que apoyarnos en estruct
 Entonces modularizemos este proceso en dos funciones: Una que a partir de la lista va a devolver un diccionario, y otra que a partir del diccionario va a devolver una lista de tuplas. 
 \begin{algorithm}[H]
     \caption{
-        \textbf{proc crearDiccionarioDeCantidades}(\textbf{in} l: \textnormal{Vector\textless{}nat\textgreater{}}): \textnormal{DiccLog\textless{}nat, nat\textgreater{}}
+        \textbf{proc crearDiccionarioDeCantidades}(\textbf{in} arr: \textnormal{Array\textless{}nat\textgreater{}}) $\to$ \textbf{out} res:  \textnormal{DiccLog\textless{}nat, nat\textgreater{}}
     }
     \begin{algorithmic}[1]
         \State var res: \textnormal{DiccLog\textless{}nat, nat\textgreater{}} = new diccionarioVacío();  \Comment {$O(1)$}
-        \For{$i = 0$ \textbf{to} $l.longitud()$} \Comment {$O(n)$}
-            \State var actual: int = l.obtener(i); \Comment {$O(1)$}
-            \If{$res.\text{está}(actual)$} \Comment {$O(Log(n))$}
+        \State var i: int = 0;
+        \While{i $<$ arr.longitud()} \Comment {$O(n)$}
+            \State var actual: int = arr[i]; \Comment {$O(1)$}
+            \If{res.está(actual)} \Comment {$O(Log(n))$}
                 \State var previo: int = res.obtener(actual); \Comment {$O(Log(n))$}
                 \State \hyperref[sec:explanation1]{previo = previo + 1; \textcolor{blue}{$*^{1}$}}
             \Else
                 \State res.definir(actual, 1); \Comment {$O(Log(n))$}
             \EndIf 
-        \EndFor
+            \State i = i + 1;
+        \EndWhile
     \State return res;
     \end{algorithmic}
-    \Complexity{$O(n) \times O(2Log(n)) = O(nLog(n))$}
+    \Complexity{$O(n) \times O(2Log(n)) = O(nLog(n)) \text{ con } n = arr.longitud()$ }
 \end{algorithm}
 
 \label{sec:explanation1}
 \textcolor{blue}{$*^{1}$}Asumimos que hay aliasing, por lo que cuando pedimos el valor asociada a una clave en el diccionario, al modificar el valor no hace falta volver a modificar el par clave valor. (Agregar explicación de porque pasa)
 \begin{algorithm}[H]
     \caption{
-        \textbf{proc crearListaDeTuplas}(\textbf{in} dict: \textnormal{DiccLog\textless{}nat, nat\textgreater{}}): \textnormal{ListaEnlazada\textless{}Tupla \textless{} nat, nat \textgreater{}\textgreater{}}
+        \textbf{proc crearArrayDeTuplas}(\textbf{in} dict: \textnormal{DiccLog\textless{}nat, nat\textgreater{}}) $\to$ \textbf{out} res: \textnormal{Array\textless{}Tupla \textless{}nat, nat\textgreater{}\textgreater{}}
     }
     \begin{algorithmic}[1]
-        \State var res : ListaEnlazada\textless{}Tupla \textless{} nat, nat \textgreater{}\textgreater{} = vectorVacío(); \Comment {$O(1)$}
+        \State var res: Array\textless{}Tupla \textless{} nat, nat \textgreater{}\textgreater{} = new Array(dict.tamaño()); \Comment {$O(n)$}
         \State \hyperref[sec:explanation2] {var it : IteradorBidireccional = dict.iterador(); \textcolor{cyan}{$*^{2}$}}  \Comment{$O(1)$}
-        \While{it.haySiguiente()} \Comment{$O(n)$} 
-            \State res.agregarAtras(it); \Comment{$O(1)$}
-            \State it.siguiente();\Comment{$O(1)$}
+        \State var i: int = 0;
+        \While{i $<$ dict.tamaño()} \Comment{$O(n)$}
+            \State res[i] = it; \Comment{$O(1)$}
+            \State it.siguiente(); \Comment{$O(1)$}
+            \State i = i + 1;
         \EndWhile
         \State return res;
     \end{algorithmic}
-    \Complexity{$O(n)$}
+    \Complexity{$O(n) \text{ con } n = \text{dict.tamaño()}$}
 \end{algorithm}
 \label{sec:explanation1}
 
@@ -188,7 +197,58 @@ Entonces modularizemos este proceso en dos funciones: Una que a partir de la lis
 
 Agregar comentario complejidad recorrer el diccionario.
 
-\subsubsection*{Paso 2: Ordenar la lista de tuplas}
-\subsubsection*{Paso 3: Reconstruir la solución}
+\subsubsection*{Paso 2: Ordenar el arreglo de tuplas}
+Una vez que llegamos al array de tuplas y es momento de ordenarlo es crucial elegir bien por cual criterio vamos a ordenar primero y si los algoritmos de ordenamiento que vamos a usar son estables o no.
 
+
+Como queremos que el criterio principal a ordenar sea por cantidad de apariciones de mayor a menor y en caso de empate en cantidad de apariciones va a ir primero el menor numero. La solución va a ser primero ordenar el primer elemento de la tupla de menor a mayor con cualquier algoritmo de ordenamiento y luego con un algoritmo de ordenamiento \textbf{estable}.
+
+¿Porque es crucial que sea estable el segundo ordenamiento? Porque si no vamos a perder el orden del primer ordenamiento. Por ejemplo si primero ordenamos por la primera clave de menor a mayor y luego ordenamos la segunda de mayor a menor usando Heap Sort, que no es estable, lo que pasaría sería:
+
+[(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3}), (2, \textcolor{blue}{1})] \textcolor{green}{$\curly$} [(1, \textcolor{green}{3}), (2, \textcolor{blue}{1}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2})] \textcolor{red}{$\curly$} [(7, \textcolor{green}{3}), (1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (2, \textcolor{blue}{1})] \textcolor{red}{$\curly$} [7,7,7,1,1,1,3,3,2] \textcolor{red}{\ding{55}}
+
+En cambio con un algoritmo de ordenamiento estable: 
+
+[(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3}), (2, \textcolor{blue}{1})] \textcolor{green}{$\curly$} [(1, \textcolor{green}{3}), (2, \textcolor{blue}{1}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2})] \textcolor{green}{$\curly$} [(1, \textcolor{green}{3}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (2, \textcolor{blue}{1})] \textcolor{green}{$\curly$} [1,1,1,7,7,7,3,3,2] \textcolor{green}{\ding{51}}
+
+\meta{¿Se podría ordenar primero por el primer criterio y luego por el segundo?}
+
+Un contraejemplo de que este procedimiento no nos daría la solución correcta lo podemos ver siguiendo los resultados de los ordenamientos más el pasaje a array:
+
+[(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3}), (2, \textcolor{blue}{1})] \textcolor{red}{$\curly$} [(1, \textcolor{green}{3}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (2, \textcolor{blue}{1})] \textcolor{red}{$\curly$} [(1, \textcolor{green}{3}), (2, \textcolor{blue}{1}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3})] \textcolor{red}{$\curly$} [1,1,1,2,3,3,7,7,7] \textcolor{red}{\ding{55}}
+
+\begin{algorithm}[H]
+    \caption{
+        \textbf{proc ordenarTuplas}(\textbf{in} arr: \textnormal{Array\textless{}Tupla\textless{}nat, nat\textgreater{}\textgreater{}}) $\to$ \textbf{out} arr: \textnormal{Array\textless{}Tupla\textless{}nat, nat\textgreater{}\textgreater{}}
+    }
+    \begin{algorithmic}[1]
+        \State mergeSort(arr) \Comment{De menor a mayor por el primer componente. $O(nLog(n))$}
+        \State mergeSort(arr) \Comment{De mayor a menor por el segundo componente. $O(nLog(n))$}
+        \State return arr;
+    \end{algorithmic}
+    \Complexity{$O(nLog(n)) \text{ con } n = arr.longitud()$}
+\end{algorithm}
+
+\subsubsection*{Paso 3: Reconstruir la solución}
+\begin{algorithm}[H]
+    \caption{
+        \textbf{proc reconstruirArray}(\textbf{in} arr:\textnormal{Array\textless{}Tupla\textless{}nat, nat\textgreater{}\textgreater{}}, int tamaño)$\to$ \textbf{out} res: \textnormal{Array\textless{}nat\textgreater{}}
+    }
+    \begin{algorithmic}[1]
+        \State var res: Array\textless{}nat\textgreater{} = new Array(tamaño); \Comment{$O(n)$}
+        \State var i: int = 0;
+        \State var indiceActual = 0;
+        \While{i $<$ arr.longitud}
+            \State var j: int = 0;
+            \While{j $<$ arr[i].second}
+                \State res[indiceActual] = arr[i].first;
+                \State indiceActual = indiceActual + 1;
+                \State j = j + 1;
+            \EndWhile{}
+            \State i = i + 1;
+        \EndWhile
+        \State return res;
+    \end{algorithmic}
+    \Complexity{}
+\end{algorithm}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.7)  8 AUG 2024 20:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.7)  24 AUG 2024 21:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -599,8 +599,17 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip85
+) (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/pifont.sty
+Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
+LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
+ (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 52.
+LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
+ (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 57.
  (/home/mati/.miktex/texmfs/install/tex/latex/listings/listings.sty
 \lst@mode=\count337
 \lst@gtempboxa=\box113
@@ -625,16 +634,7 @@ File: lstmisc.sty 2024/05/25 1.10b (Carsten Heinz)
 File: listings.cfg 2024/05/25 1.10b listings configuration
 ))
 Package: listings 2024/05/25 1.10b (Carsten Heinz)
- (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/pifont.sty
-Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
-LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
- (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/upzd.fd
-File: upzd.fd 2001/06/04 font definitions for U/pzd.
-)
-LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
- (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/upsy.fd
-File: upsy.fd 2001/06/04 font definitions for U/psy.
-)) (/home/mati/.miktex/texmfs/install/tex/latex/colortbl/colortbl.sty
+ (/home/mati/.miktex/texmfs/install/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2024/07/06 v1.0i Color table columns (DPC)
 \everycr=\toks44
 \minrowclearance=\skip86
@@ -669,7 +669,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen284
 \Gm@dimlist=\toks45
  (/home/mati/.miktex/texmfs/install/tex/latex/geometry/geometry.cfg))
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 100.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 105.
  (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 ) (prueba.aux
@@ -682,26 +682,26 @@ LaTeX Warning: Label `sec:explanation1' multiply defined.
 )
 \openout1 = `prueba.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Info: Redefining \. on input line 100.
-LaTeX Info: Redefining \% on input line 100.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Info: Redefining \. on input line 105.
+LaTeX Info: Redefining \% on input line 105.
  (/home/mati/.miktex/texmfs/install/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count350
@@ -726,7 +726,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 100.
+Package hyperref Info: Link coloring ON on input line 105.
  (prueba.out) (prueba.out)
 \@outlinefile=\write4
 \openout4 = `prueba.out'.
@@ -767,24 +767,24 @@ Package hyperref Info: Link coloring ON on input line 100.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 108.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 113.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 108.
+(Font)              size <5> substituted on input line 113.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <5.5> not available
-(Font)              size <5> substituted on input line 108.
+(Font)              size <5> substituted on input line 113.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 108.
+(Font)              size <5> substituted on input line 113.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 108.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 113.
 (/home/mati/.miktex/texmfs/install/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 108.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 113.
  (/home/mati/.miktex/texmfs/install/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -792,19 +792,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/home/mati/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map}{/home/mati/.miktex/texmfs/install/fonts/enc/dvips/base/8r.enc}]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 151.
-LaTeX Font Info:    Trying to load font information for OML+phv on input line 151.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 156.
+LaTeX Font Info:    Trying to load font information for OML+phv on input line 156.
  (/home/mati/.miktex/texmfs/install/tex/latex/psnfss/omlphv.fd
 File: omlphv.fd 
 )
 LaTeX Font Info:    Font shape `OML/phv/m/n' in size <11> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 151.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 156.
 LaTeX Font Info:    Font shape `OML/phv/m/n' in size <10.03757> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 153.
-LaTeX Font Info:    Calculating math sizes for size <10.03757> on input line 153.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 158.
+LaTeX Font Info:    Calculating math sizes for size <10.03757> on input line 158.
 
 
-LaTeX Warning: Hyper reference `sec:explanation2' on page  undefined on input line 176.
+LaTeX Warning: Hyper reference `sec:explanation2' on page  undefined on input line 183.
 
 
 
@@ -812,8 +812,15 @@ LaTeX Warning: Hyper reference `sec:explanation2' on page  undefined on input li
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.194 \end{document}
-                     [2] (prueba.aux
+l.207 
+       [2]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.254 \end{document}
+                     [3] (prueba.aux
 LaTeX Info: Redefining \. on input line 13.
 LaTeX Info: Redefining \% on input line 13.
 )
@@ -836,17 +843,17 @@ Package rerunfilecheck Info: File `prueba.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 19954 strings out of 475834
- 332280 string characters out of 5778306
+ 19960 strings out of 475834
+ 332326 string characters out of 5778306
  1942957 words of memory out of 5000000
- 42213 multiletter control sequences out of 15000+600000
- 576426 words of font info for 77 fonts, out of 8000000 for 9000
+ 42217 multiletter control sequences out of 15000+600000
+ 576786 words of font info for 78 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
  94i,8n,117p,604b,683s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prueba.pdf (2 pages, 80184 bytes).
+</home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/public/amsfonts/symbols/msam10.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb></home/mati/.miktex/texmfs/install/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on prueba.pdf (3 pages, 95571 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 8 named destinations out of 1000 (max. 500000)
+ 77 PDF objects out of 1000 (max. 8388607)
+ 10 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
