@@ -1,6 +1,8 @@
 \documentclass{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{etoolbox}
 \usepackage[spanish]{babel}
 \usepackage{amsmath, amsbsy, amssymb}
 \usepackage{enumerate}
@@ -21,7 +23,14 @@
 \usepackage{hyperref}
 \usepackage{amsmath,amssymb}
 \usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
 
+\setlength{\baselineskip}{1em} % Ajusta el interlineado
+\setlength{\parskip}{0em} % Ajusta el espacio entre párrafos
+
+\AtBeginEnvironment{algorithm}{\setstretch{0.9}} % Espaciado reducido
+\AtBeginEnvironment{algorithmic}{\setstretch{0.9}} % Espaciado reducido
 
 \newcommand{\curly}{\mathrel{\leadsto}}
 
@@ -38,12 +47,13 @@
     \usepackage{titlesec}
     \titleformat*{\section}{\large\bfseries}
     \titleformat*{\subsection}{\normalsize\bfseries}
-    \titlespacing*{\section}{0pt}{1em}{0.65em}
-    \titlespacing*{\subsection}{0pt}{0.5em}{0.5em}
+    \titlespacing*{\section}{0pt}{0.1em}{0.2em} 
+    \titlespacing*{\subsection}{0pt}{0.1em}{0.1em} 
+    \titlespacing*{\subsubsection}{0pt}{0.1em}{0.1em} 
     \pagenumbering{gobble}
     \usepackage[a4paper,top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
     \setlength{\parindent}{0em}
-    \setlength{\parskip}{0.65em}
+    \setlength{\parskip}{0.3em}
     \setlength{\intextsep}{1em}
     \setlength{\abovedisplayskip}{1em}
     \setlength{\belowdisplayskip}{1em}
@@ -76,7 +86,8 @@
         {ñ}{{\~n}}1
         {Ñ}{{\~N}}1
 }
-
+\definecolor{goldenrod}{rgb}{0.85, 0.65, 0.13} 
+\definecolor{violetDark}{RGB}{75,0,130}
 \usepackage{pifont}
 \newcommand{\xmark}{\color{purple}\ding{54}}
 
@@ -104,151 +115,166 @@
 
 \begin{document}
 
-\hfill
-Matías Eliel Waisman 
+\noindent
+\vspace{-5pt}
+\begin{tabularx}{\textwidth}{Xr}
+Prueba de oposición Ayte. 2da área Algoritmos 2024 & Matías Eliel Waisman \\
+\end{tabularx}
+
+% Subrayado negro en todo el ancho
+\noindent\color{black}\rule{\textwidth}{0.4pt}
+
+\vspace{10pt}
 
 \section*{Enunciado}
 \section*{\normalsize{AED Primer Cuatrimestre 2024 / Práctica 8 - Ordenamiento / Ejercicio 5}}
 
-Se tiene un arreglo de \(n\) números naturales que se quiere ordenar por frecuencia, y en caso de igual frecuencia,
-por su valor. Por ejemplo, a partir del arreglo [1, 3, 1, 7, 2, 7, 1, 7, 3] se quiere obtener [1, 1, 1, 7, 7, 7, 3, 3, 2].
-Describa un algoritmo que realice el ordenamiento descrito, utilizando las estructuras de datos intermedias que
-considere necesarias. Calcule el orden de complejidad temporal del algoritmo propuesto
+Se tiene un arreglo de \(n\) números naturales que se quiere ordenar por frecuencia, y en caso de igual frecuencia, por su valor. Por ejemplo, a partir del arreglo [1, 3, 1, 7, 2, 7, 1, 7, 3] se quiere obtener [1, 1, 1, 7, 7, 7, 3, 3, 2].
+Describa un algoritmo que realice el ordenamiento descrito, utilizando las estructuras de datos intermedias que considere necesarias. Calcule el orden de complejidad temporal del algoritmo propuesto.
+\vspace*{\fill} % Espacio vacío después del enunciado
 
-\section*{Contexto y conocimientos previos del alumno}
-Este ejercicio se encuentra al principio de la guía de ordenamiento. Puede ser uno de los primeros ejercicios a dar en una clase practica luego de introducir los algoritmos de ordenamiento y me parece un buen ejercicio para mostrar: 
-Como usar las estructuras de datos a la hora de resolver problemas (en particular de ordenamiento), la importancia de los algoritmos de ordenamiento estables y como podemos reducir un problema menos general en uno más general que si sabemos resolver (en particular uno de ordenamiento). 
+\newpage % O \clearpage
+\section*{Contexto del ejercicio y conocimientos previos del alumno}
+Este ejercicio se encuentra al comienzo de la guía. Puede ser uno de los primeros ejercicios a dar en una clase luego de introducir los algoritmos de ordenamiento y me parece un buen ejercicio para mostrar: 
 
-Se asume que los alumnos: 
+Como usar las estructuras de datos a la hora de resolver problemas (en particular de ordenamiento), qué son y para qué sirven los algoritmos de ordenamiento estables con un ejemplo concreto y cómo podemos reducir un problema menos general en uno más general que si sabemos resolver y podemos extrapolar con otros problemas (en particular uno de ordenamiento). 
+
+
+\subsection{Se asume que los alumnos:} 
+
 \begin{itemize}
+    \setlength{\itemsep}{0.01em}
     \item Saben determinar el orden de complejidad temporal del peor caso de un algoritmo.
-    \item Estan familiarizados con las estructuras de datos presentadas en la guía de elección de estructuras y las complejidades de sus operaciones.
-    \item Estan familiarizados con los algoritmos de ordenamiento, no como implementarlos de memoria sino como funcionan, sus invariantes y complejidades.
+    \item Están familiarizados con las estructuras de datos presentadas en la guía de elección de estructuras y las complejidades de sus operaciones.
+    \item Están familiarizados con los algoritmos de ordenamiento, no cómo implementarlos de memoria sino como funcionan, sus invariantes y complejidades.
     \item \textbf{Nunca} resolvieron un ejercicio de ordenamiento en el que hace falta ordenar por más de un criterio y ejercicios de ordenamiento con tuplas.
-\end{itemize}
+    \end{itemize}
 
+\vspace{-0.95em}
 \section*{Desarrollo del ejercicio}
-\meta{Observación del enunciado:} En este problema no solamente hay que ordenar por cantidad de apariciones, de mayor a menor, si no que tambien en caso de que dos elementos tengan la misma cantidad de apariciones tiene que ser de menor a mayor. 
+\meta{Observación del enunciado:} En este problema no solamente hay que ordenar por \textcolor{blue}{cantidad de apariciones}, de \textcolor{blue}{mayor a menor}, si no que tambien en caso de que dos elementos tengan la \textcolor{violetDark}{misma cantidad de apariciones} tiene que estar primero el de \textcolor{violetDark}{menor valor}. 
 
 \subsection{Preguntas orientadoras para encaminar la resolución del ejercicio}
-¿Se vuelve más fácil el problema de ordenar si en vez de tener la lista: [\textcolor{green}{1}, \textcolor{cyan}{3}, \textcolor{green}{1}, \textcolor{green}{7}, \textcolor{blue}{2}, \textcolor{green}{7}, \textcolor{green}{1}, \textcolor{green}{7}, \textcolor{cyan}{3}] tenemos la lista: 
-[(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}),(7, \textcolor{green}{3}), (2, \textcolor{blue}{1})]? 
-¿Que representa cada tupla respecto de los elementos de lista original?
+¿Se vuelve más fácil el problema de ordenar si en vez de tener el arreglo: [\textcolor{green}{1}, \textcolor{goldenrod}{3}, \textcolor{green}{1}, \textcolor{green}{7}, \textcolor{orange}{2}, \textcolor{green}{7}, \textcolor{green}{1}, \textcolor{green}{7}, \textcolor{goldenrod}{3}] tenemos el arreglo: 
+[(1, \textcolor{green}{3}), (3, \textcolor{goldenrod}{2}),(7, \textcolor{green}{3}), (2, \textcolor{orange}{1})]? 
+¿Qué representa cada tupla respecto de los elementos del arreglo original?
 
-Si ahora en vez de ordenar la lista original por los criterios del enunciado, la queremos ordenar primero por la segunda componente de las tuplas en orden descendente y en caso de empate por la segunda en orden ascendente, se vuelve un problema más fácil? ¿Cómo pódemos hacerlo?
+Si ahora en vez de ordenar el arreglo original por los criterios del enunciado: Lo queremos ordenar por las \textcolor{blue}{segundas componentes} de las tuplas en \textcolor{blue}{orden descendente} y en \textcolor{violetDark}{caso de empate} tiene que estar primero el elemento con un \textcolor{violetDark}{menor valor en su primer componente}: ¿Se vuelve un problema más fácil? ¿Cómo pódemos hacerlo? ¿Tiene una relación ese ordenamiento con el ordenamiento que estamos buscando?
 
 \section*{Resolución}
-Podemos separar el problema en varios subproblemas a resolver:
-\begin{enumerate}
-    \item Transformar la lista original en una lista de tuplas.
-    \item Ordenar la lista de tuplas con los criterios que nos interesan.
-    \item Reconstruir la solución.
-\end{enumerate}
+Podemos separar el problema en tres subproblemas a resolver:
 \subsubsection*{Paso 1: Transformar la lista original}
 Una primera intuición para llegar a la lista de tuplas puede ser recorrer la lista original, pero: ¿Cómo hacemos para guardar la cantidad de apariciones de cada elemento?
 
-Dentro de los ejercicios de Sorting es muy común tener que apoyarnos en estructuras de datos auxiliares además de la lista original para llegar a nuestro cometido. Por lo que podemos apoyarnos de un diccionario implementado sobre un AVL (DiccLog) para ir actualizando la cantidad de apariciones de los elementos. Y una vez que tenemos para cada elemento de la lista original su cantidad de apariciones con el iterador del diccionario podemos terminar de construir la lista de tuplas.
+Dentro de los ejercicios de Sorting es muy común tener que apoyarnos en estructuras de datos auxiliares además del arreglo original para llegar a nuestro cometido. Por lo que podemos apoyarnos de un diccionario implementado sobre un AVL (DiccLog) para ir actualizando la cantidad de apariciones de los elementos. 
 
-Entonces modularizemos este proceso en dos funciones: Una que a partir de la lista va a devolver un diccionario, y otra que a partir del diccionario va a devolver una lista de tuplas. 
+Una vez que llenamos el diccionario, con los elementos del array y su cantidad de apariciones, podemos terminar de construir el array de tuplas usando el iterador del diccionario.
+
+
+Modularizemos este proceso en dos funciones: Una que a partir del array va a devolver un diccionario, y otra que a partir del diccionario va a devolver un arreglo de tuplas. 
+
+Asumimos que hay aliasing, por lo que cuando pedimos el valor asociado a una clave en el diccionario, al modificar ese valor no hace falta volver a modificar el par clave valor. Ya que usamos referencias de las variables en vez de copias. 
 \begin{algorithm}[H]
     \caption{
         \textbf{proc crearDiccionarioDeCantidades}(\textbf{in} arr: \textnormal{Array\textless{}nat\textgreater{}}) $\to$ \textbf{out} res:  \textnormal{DiccLog\textless{}nat, nat\textgreater{}}
     }
     \begin{algorithmic}[1]
         \State var res: \textnormal{DiccLog\textless{}nat, nat\textgreater{}} = new diccionarioVacío();  \Comment {$O(1)$}
-        \State var i: int = 0;
-        \While{i $<$ arr.longitud()} \Comment {$O(n)$}
+        \For {var i: int = 0 \textbf{to} arr.longitud() - 1}\Comment {$O(n)$}
             \State var actual: int = arr[i]; \Comment {$O(1)$}
             \If{res.está(actual)} \Comment {$O(Log(n))$}
                 \State var previo: int = res.obtener(actual); \Comment {$O(Log(n))$}
-                \State \hyperref[sec:explanation1]{previo = previo + 1; \textcolor{blue}{$*^{1}$}}
+                \State {previo = previo + 1;}
             \Else
                 \State res.definir(actual, 1); \Comment {$O(Log(n))$}
             \EndIf 
-            \State i = i + 1;
-        \EndWhile
+        \EndFor
     \State return res;
     \end{algorithmic}
     \Complexity{$O(n) \times O(2Log(n)) = O(nLog(n)) \text{ con } n = arr.longitud()$ }
 \end{algorithm}
-
-\label{sec:explanation1}
-\textcolor{blue}{$*^{1}$}Asumimos que hay aliasing, por lo que cuando pedimos el valor asociada a una clave en el diccionario, al modificar el valor no hace falta volver a modificar el par clave valor. (Agregar explicación de porque pasa)
 \begin{algorithm}[H]
     \caption{
         \textbf{proc crearArrayDeTuplas}(\textbf{in} dict: \textnormal{DiccLog\textless{}nat, nat\textgreater{}}) $\to$ \textbf{out} res: \textnormal{Array\textless{}Tupla \textless{}nat, nat\textgreater{}\textgreater{}}
     }
     \begin{algorithmic}[1]
         \State var res: Array\textless{}Tupla \textless{} nat, nat \textgreater{}\textgreater{} = new Array(dict.tamaño()); \Comment {$O(n)$}
-        \State \hyperref[sec:explanation2] {var it : IteradorBidireccional = dict.iterador(); \textcolor{cyan}{$*^{2}$}}  \Comment{$O(1)$}
-        \State var i: int = 0;
-        \While{i $<$ dict.tamaño()} \Comment{$O(n)$}
+        \State {var it : IteradorBidireccional = dict.iterador(); \footnotemark} \Comment{$O(1)$}
+        \For{var i: int = 0 \textbf{to} dict.tamaño() - 1} \Comment{$O(n)$}
             \State res[i] = it; \Comment{$O(1)$}
-            \State it.siguiente(); \Comment{$O(1)$}
-            \State i = i + 1;
-        \EndWhile
+            \State it = it.siguiente(); \Comment{$O(1)$}
+        \EndFor
         \State return res;
     \end{algorithmic}
     \Complexity{$O(n) \text{ con } n = \text{dict.tamaño()}$}
 \end{algorithm}
-\label{sec:explanation1}
-
-\textcolor{cyan}{$*^{2}$} Recordar que el iterador está representado como una tupla, cuyo primer elemento es la clave y el segundo el valor.
-
-Agregar comentario complejidad recorrer el diccionario.
-
+\vspace{-1.2em}
 \subsubsection*{Paso 2: Ordenar el arreglo de tuplas}
-Una vez que llegamos al array de tuplas y es momento de ordenarlo es crucial elegir bien por cual criterio vamos a ordenar primero y si los algoritmos de ordenamiento que vamos a usar son estables o no.
+En este punto pasamos de un problema mucho más específico a un problema más general.
+Ahora nuestro problema es ordenar por las \textcolor{blue}{segundas componentes}, de \textcolor{blue}{mayor a menor}, y en \textcolor{violetDark}{caso de empate} tiene que aparecer primero el elemento que tenga un \textcolor{violetDark}{menor valor en su primera componente}.
+
+A la hora de ordenar las tuplas es crucial elegir bien por cual criterio vamos a ordenar primero y si los algoritmos de ordenamiento que vamos a usar son estables o no.
 
 
-Como queremos que el criterio principal a ordenar sea por cantidad de apariciones de mayor a menor y en caso de empate en cantidad de apariciones va a ir primero el menor numero. La solución va a ser primero ordenar el primer elemento de la tupla de menor a mayor con cualquier algoritmo de ordenamiento y luego con un algoritmo de ordenamiento \textbf{estable}.
+Recordemos que lo que hacen los algoritmos de ordenamiento estables es que en caso que dos elementos tengan el mismo valor va a quedar primero el que estaba primero en el array antes de ordenar.
 
-¿Porque es crucial que sea estable el segundo ordenamiento? Porque si no vamos a perder el orden del primer ordenamiento. Por ejemplo si primero ordenamos por la primera clave de menor a mayor y luego ordenamos la segunda de mayor a menor usando Heap Sort, que no es estable, lo que pasaría sería:
+Como queremos que el \textcolor{blue}{criterio principal} sea ordenar por las \textcolor{blue}{segundas componentes} y, en \textcolor{violetDark}{caso de empate}, desempatar por la \textcolor{violetDark}{primer componente}: Primero ordenamos con cualquier algoritmo de ordenamiento por el \textcolor{violetDark}{criterio secundario / de desempate} y luego ordenamos por el \textcolor{blue}{criterio principal} con un algoritmo de ordenamiento \textbf{estable}. 
 
-[(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3}), (2, \textcolor{blue}{1})] \textcolor{green}{$\curly$} [(1, \textcolor{green}{3}), (2, \textcolor{blue}{1}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2})] \textcolor{red}{$\curly$} [(7, \textcolor{green}{3}), (1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (2, \textcolor{blue}{1})] \textcolor{red}{$\curly$} [7,7,7,1,1,1,3,3,2] \textcolor{red}{\ding{55}}
+Así, en caso de que \textcolor{violetDark}{dos elementos tengan la misma segunda componente}, va a quedar primero aquel que estaba primero antes del segundo ordenamiento. Entonces, quién va a estar primero? El elemento cuya \textcolor{violetDark}{primer componente es menor}, logrando el \textcolor{violetDark}{desempate} que estabamos buscando!
 
-En cambio con un algoritmo de ordenamiento estable: 
+\meta{¿Se podría ordenar primero por el criterio principal y luego por el secundario?}
 
-[(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3}), (2, \textcolor{blue}{1})] \textcolor{green}{$\curly$} [(1, \textcolor{green}{3}), (2, \textcolor{blue}{1}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2})] \textcolor{green}{$\curly$} [(1, \textcolor{green}{3}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (2, \textcolor{blue}{1})] \textcolor{green}{$\curly$} [1,1,1,7,7,7,3,3,2] \textcolor{green}{\ding{51}}
-
-\meta{¿Se podría ordenar primero por el primer criterio y luego por el segundo?}
-
-Un contraejemplo de que este procedimiento no nos daría la solución correcta lo podemos ver siguiendo los resultados de los ordenamientos más el pasaje a array:
+Una prueba de que esta idea no es correcta la podemos ver siguiendo los ordenamientos más el pasaje a array:
 
 [(1, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3}), (2, \textcolor{blue}{1})] \textcolor{red}{$\curly$} [(1, \textcolor{green}{3}), (7, \textcolor{green}{3}), (3, \textcolor{cyan}{2}), (2, \textcolor{blue}{1})] \textcolor{red}{$\curly$} [(1, \textcolor{green}{3}), (2, \textcolor{blue}{1}), (3, \textcolor{cyan}{2}), (7, \textcolor{green}{3})] \textcolor{red}{$\curly$} [1,1,1,2,3,3,7,7,7] \textcolor{red}{\ding{55}}
 
+\vspace{-0.5em}
 \begin{algorithm}[H]
     \caption{
         \textbf{proc ordenarTuplas}(\textbf{in} arr: \textnormal{Array\textless{}Tupla\textless{}nat, nat\textgreater{}\textgreater{}}) $\to$ \textbf{out} arr: \textnormal{Array\textless{}Tupla\textless{}nat, nat\textgreater{}\textgreater{}}
     }
     \begin{algorithmic}[1]
-        \State mergeSort(arr) \Comment{De menor a mayor por el primer componente. $O(nLog(n))$}
-        \State mergeSort(arr) \Comment{De mayor a menor por el segundo componente. $O(nLog(n))$}
+        \State heapSort(arr) \Comment{De menor a mayor por las primeras componentes. $O(nLog(n))$}
+        \State mergeSort(arr) \Comment{De mayor a menor por las segundas componentes. $O(nLog(n))$}
         \State return arr;
     \end{algorithmic}
     \Complexity{$O(nLog(n)) \text{ con } n = arr.longitud()$}
 \end{algorithm}
-
+\vspace{-1.2em}
 \subsubsection*{Paso 3: Reconstruir la solución}
+Para reconstruir la solución al ejercicio hay que recordar la semántica que le dimos a las tuplas: La primer componente representa el elemento y la segunda su cantidad de apariciones.
+\vspace{-0.75em}
 \begin{algorithm}[H]
     \caption{
         \textbf{proc reconstruirArray}(\textbf{in} arr:\textnormal{Array\textless{}Tupla\textless{}nat, nat\textgreater{}\textgreater{}}, int tamaño)$\to$ \textbf{out} res: \textnormal{Array\textless{}nat\textgreater{}}
     }
     \begin{algorithmic}[1]
         \State var res: Array\textless{}nat\textgreater{} = new Array(tamaño); \Comment{$O(n)$}
-        \State var i: int = 0;
         \State var indiceActual = 0;
-        \While{i $<$ arr.longitud}
-            \State var j: int = 0;
-            \While{j $<$ arr[i].second}
-                \State res[indiceActual] = arr[i].first;
-                \State indiceActual = indiceActual + 1;
-                \State j = j + 1;
-            \EndWhile{}
-            \State i = i + 1;
-        \EndWhile
+        \For{var i: int = 0 \textbf{to} arr.longitud - 1} \Comment{$O(ed)$} 
+            \For{var j: int = 0 \textbf{to} arr[i].second - 1} \Comment{$O(ca)$}
+                \State res[indiceActual] = arr[i].first; \Comment{$O(1)$}
+                \State indiceActual = indiceActual + 1; \Comment{$O(1)$}
+            \EndFor
+        \EndFor
         \State return res;
     \end{algorithmic}
-    \Complexity{}
+    \Complexity{$O(n) + O(ed) \times O(ca) = O(n + ed \times ca) = O(n)$  con $ed =$ cantidad de elementos distintos en el array original, $ca =$ la cantidad de apariciones de $arr[i]$ y $n$ la longitud del array original}
 \end{algorithm}
+\vspace{-0.95em}
+La función recibe como parámetro el largo del array original para no tener que usar un vector y luego convertirlo a arreglo o tener que primero contar la cantidad de elementos totales para crear el array res. 
+
+Por más que hay un ciclo anidado en la función, la complejidad sigue siendo lineal respecto del array original. Ya que la cantidad de iteraciones totales va a ser igual a la cantidad total de elementos en el array original. Porque por cada elemento único del array vamos a hacer su cantidad de apariciones iteraciones. Por lo que la suma de iteraciones va a ser igual a la cantidad de elementos del array que estabamos buscando ordenar: \textbf{$O(n)$}
+
+La complejidad final de nuestro algoritmo juntando las partes va a ser, siendo $n$ la longitud del array:
+\vspace{-0.95em}
+\begin{center}
+    
+    \textbf{$O(nlog(n)) + O(n) + O(nlog(n)) + O(n) = O(nlog(n))$}
+    
+\end{center}
+\label{sec:explanation1}
+\vspace{-0.2em}
+\footnotetext{Recordar que el iterador está representado como una tupla, cuyo primer elemento es la clave y el segundo el valor.}
+
 \end{document}
